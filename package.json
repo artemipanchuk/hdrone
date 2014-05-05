@@ -1,0 +1,29 @@
+{
+    "name"        : "ndrone",
+    "description" : "Hybrid software for quadrocopter on Node.js",
+    "version"     : "0.3.0",
+    "keywords"    : ["copter"],
+
+    "contributors" : [
+        "Paul Loyd <pavelko95@gmail.com>",
+        "Mike H. Hawley <mikehhawley@gmail.com>"
+    ],
+
+    "engines" : {
+        "node" : ">=0.10"
+    },
+
+    "repository" : {
+        "type"   : "git",
+        "url"     : "http://github.com/mikehhawley/ndrone.git"
+    },
+
+    "devDependencies" : {
+        "typescript"  : ">=0.9",
+        "tslint"      : ">=0.4"
+    },
+
+    "dependencies" : {
+        "smoothie" : "~1"
+    }
+}
