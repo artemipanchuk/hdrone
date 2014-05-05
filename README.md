@@ -73,4 +73,4 @@ Documenting
 ===========
 Documentation style
 -------------------
-Follow (Google's JSDoc)[https://developers.google.com/closure/compiler/docs/js-for-compiler]
+Follow [Google's JSDoc](https://developers.google.com/closure/compiler/docs/js-for-compiler)
