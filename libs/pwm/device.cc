@@ -457,7 +457,6 @@ void PWM::Device::set(int value) {
     clear_channel(this->channel_id, this->pin_id);
     set_channel(this->channel_id, this->pin_id, value);
 
-    printf("%d %d %d\n", this->channel_id, this->pin_id, this->value);
 }
 
 void PWM::Device::clear(void) {
