@@ -1,4 +1,4 @@
-#include "afro_esc.hh"
+#include "device.hh"
 
 /*****************
  * Local structs *
@@ -55,34 +55,27 @@ static int pins_setup     = 0;
  * Local functions *
  *******************/
 
-static void udelay(int us);
-static void error(const char* status);
-static void* map_peripheral(uint32_t start, uint32_t size);
-static void init_pin(int pin_id);
-static void uninit_pin(int pin_id);
-static void set_pin_mode(int pin_id, uint32_t mode);
-static void set_pin_level(int pin_id, int level);
-static void init_channel(int channel_id);
-static void init_channel_vb(int channel_id);
-static void init_channel_pm(int channel_id);
-static void init_channel_dma(int channel_id);
-static void uninit_channel(int channel_id);
-static void set_channel(int channel_id, int pin_id, int width);
+static void     error(const char* status);
+static void*    map_peripheral(uint32_t start, uint32_t size);
+static void     init_pin(int pin_id);
+static void     uninit_pin(int pin_id);
+static void     set_pin_mode(int pin_id, uint32_t mode);
+static void     set_pin_level(int pin_id, int level);
+static void     init_channel(int channel_id);
+static void     init_channel_vb(int channel_id);
+static void     init_channel_pm(int channel_id);
+static void     init_channel_dma(int channel_id);
+static void     clear_channel(int channel_id, int pin_id);
+static void     uninit_channel(int channel_id);
+static void     set_channel(int channel_id, int pin_id, int width);
 static uint8_t* get_channel_dma(int channel_id);
 static uint32_t get_channel_v_to_p(int channel_id, void *v);
-static void init(void);
-static void uninit(void);
+static void     init(void);
+static void     uninit(void);
 
 /************
  * Auxiliary
  */
-
-static void udelay(int us) {
-    fflush(stdout);
-    
-    struct timespec ts = {0, us*1000};
-    nanosleep(&ts, NULL);
-}
 
 static void error(const char* status) {
     uninit();
@@ -295,7 +288,7 @@ static void init_channel_dma(int channel_id) {
     dma->next = get_channel_v_to_p(channel_id, get_channel_dma(channel_id));
 
     channels[channel_id].dma_a[PWM_DEVICE_DMA_CS] = PWM_DEVICE_DMA_RESET;
-    udelay(10);
+    usleep(10);
 
     channels[channel_id].dma_a[PWM_DEVICE_DMA_CS]        = PWM_DEVICE_DMA_INT | PWM_DEVICE_DMA_END;
     channels[channel_id].dma_a[PWM_DEVICE_DMA_CONBLK_AD] = get_channel_v_to_p(channel_id, get_channel_dma(channel_id));
@@ -310,21 +303,21 @@ static void uninit_channel(int channel_id) {
     int i;
 
     if(!channels[channel_id].vb)
-        error("Invalid VB clearing channel");
+        error("Invalid VB uninitializing channel");
 
     for(i = 0; i < channels[channel_id].num_samples; ++i) {
         dma->da = PWM_DEVICE_PHYS_GPCLR0;
         dma    += 2;
     }
-    udelay(PWM_DEVICE_SUBCYCLE_TIME_US);
+    usleep(PWM_DEVICE_SUBCYCLE_TIME_US);
 
     for(i = 0; i < channels[channel_id].num_samples; ++i) {
         *(vb + i) = 0;
     }
-    udelay(PWM_DEVICE_SUBCYCLE_TIME_US);
+    usleep(PWM_DEVICE_SUBCYCLE_TIME_US);
             
     channels[channel_id].dma_a[PWM_DEVICE_DMA_CS] = PWM_DEVICE_DMA_RESET;
-    udelay(10);
+    usleep(10);
 
     channels_setup -= 1 << channel_id;
 }
@@ -399,21 +392,21 @@ static void init(void) {
         error("Failed to mmap initiating");
 
     pwm_region[PWM_DEVICE_PWM_CTL]     = 0; 
-    udelay(10);
+    usleep(10);
     clk_region[PWM_DEVICE_PWMCLK_CNTL] = 0x5A000006;
-    udelay(100);
+    usleep(100);
     clk_region[PWM_DEVICE_PWMCLK_DIV]  = 0x5A000000 | (50<<12);
-    udelay(100);
+    usleep(100);
     clk_region[PWM_DEVICE_PWMCLK_CNTL] = 0x5A000016;
-    udelay(100);
+    usleep(100);
     pwm_region[PWM_DEVICE_PWM_RNG1]    = PWM_DEVICE_PULSE_WIDTH_INCREMENT_US * 10;
-    udelay(10);
+    usleep(10);
     pwm_region[PWM_DEVICE_PWM_DMAC]    = PWM_DEVICE_PWMDMAC_ENAB | PWM_DEVICE_PWMDMAC_THRSHLD;
-    udelay(10);
+    usleep(10);
     pwm_region[PWM_DEVICE_PWM_CTL]     = PWM_DEVICE_PWMCTL_CLRF;
-    udelay(10);
+    usleep(10);
     pwm_region[PWM_DEVICE_PWM_CTL]     = PWM_DEVICE_PWMCTL_USEF1 | PWM_DEVICE_PWMCTL_PWEN1;
-    udelay(10);
+    usleep(10);
 }
 
 static void uninit(void) {
@@ -456,7 +449,6 @@ void PWM::Device::set(int value) {
 
     clear_channel(this->channel_id, this->pin_id);
     set_channel(this->channel_id, this->pin_id, value);
-
 }
 
 void PWM::Device::clear(void) {

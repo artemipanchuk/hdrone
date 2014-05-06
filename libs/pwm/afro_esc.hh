@@ -1,5 +1,8 @@
 #include "device.hh"
 
+#ifndef PWM_AFRO_ESC_H
+#define PWM_AFRO_ESC_H
+
 namespace PWM {
     class Afro_ESC: public Device {
     public:
@@ -13,3 +16,5 @@ namespace PWM {
         const static int RANGE = 186-106;
     };
 }
+
+#endif

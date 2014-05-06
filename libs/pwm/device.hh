@@ -13,6 +13,9 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 
+#ifndef PWM_DEVICE_H
+#define PWM_DEVICE_H
+
 #define PWM_DEVICE_DELAY_VIA_PWM                 0
 #define PWM_DEVICE_DELAY_VIA_PCM                 1
 
@@ -113,3 +116,5 @@ namespace PWM {
         int value;
     };
 }
+
+#endif
