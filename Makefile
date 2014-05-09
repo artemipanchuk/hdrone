@@ -3,7 +3,7 @@
 ##########
 
 # Output
-OUT ?= /tmp/ndrone
+OUT ?= /tmp/hdrone
 
 # TypeScript compiler
 TSC     = ./node_modules/.bin/tsc
@@ -68,17 +68,17 @@ usage:
 build: $(OUT)/copter $(OUT)/client
 
 deploy: build $(OUT)/package.json $(OUT)/npm-shrinkwrap.json $(OUT)/binding.gyp
-	cd $(OUT) && tar -cf ndrone-copter.tar $(shell ls $(OUT) | grep -vP 'client|node_modules')
-	scp $(OUT)/ndrone-copter.tar '$(RTARGET):$(RPATH)/ndrone.tar'
-	ssh $(RTARGET) 'cd $(RPATH) && tar -xvf ndrone.tar > /dev/null && rm ndrone.tar'
+	cd $(OUT) && tar -cf hdrone-copter.tar $(shell ls $(OUT) | grep -vP 'client|node_modules')
+	scp $(OUT)/hdrone-copter.tar '$(RTARGET):$(RPATH)/hdrone.tar'
+	ssh $(RTARGET) 'cd $(RPATH) && tar -xvf hdrone.tar > /dev/null && rm hdrone.tar'
 	ssh $(RTARGET) 'cd $(RPATH) && node-gyp configure --python /bin/python2 && node-gyp build && \
 					cp build/Release/flight.node copter/flight/flight.node && rm -r build'
-	rm $(OUT)/ndrone-copter.tar
+	rm $(OUT)/hdrone-copter.tar
 
 clone:
-	tar -cf $(OUT)/ndrone.tar $(shell ls | grep -vP 'node_modules')
-	scp $(OUT)/ndrone.tar '$(RTARGET):$(RPATH)/ndrone.tar'
-	ssh $(RTARGET) 'cd $(RPATH) && tar -xvf ndrone.tar > /dev/null && rm ndrone.tar'
+	tar -cf $(OUT)/hdrone.tar $(shell ls | grep -vP 'node_modules')
+	scp $(OUT)/hdrone.tar '$(RTARGET):$(RPATH)/hdrone.tar'
+	ssh $(RTARGET) 'cd $(RPATH) && tar -xvf hdrone.tar > /dev/null && rm hdrone.tar'
 
 lint:
 	$(foreach file, $(shell find libs copter client common -name '*.ts'), \

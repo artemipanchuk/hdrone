@@ -3,7 +3,7 @@
  */
 
 /** Domain (hostname or ip-address) */
-export var DOMAIN = 'ndrone';
+export var DOMAIN = 'hdrone';
 
 /** Minimum time (natural number) between restarts workers */
 export var WORKER_RESTART_TIMEOUT = 500;
@@ -26,7 +26,7 @@ export var FPV_INFO_TIMEOUT = 1000;
 /*
     Periphery
  */
-export var GY80_I2C_BUS = '/dev/i2c-1';
+export var GY80_I2C_BUS = '/dev/i2c-0';
 export var L3G4200D_RATE = 250;
 export var ADXL345_RATE  = 50;
 export var HMC5883L_RATE = 30;

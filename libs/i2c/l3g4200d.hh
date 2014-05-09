@@ -11,7 +11,7 @@ namespace I2C {
          L3G4200D(char* bus);
         ~L3G4200D(void);
         
-        void   configure(int rate, int range);
+        void   configure(int rate);
         float* read_velocity(void);
 
     private:

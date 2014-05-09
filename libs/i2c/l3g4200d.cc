@@ -24,7 +24,7 @@ I2C::L3G4200D::~L3G4200D(void) {
     this->write(0x20, 0x00);
 }
 
-void I2C::L3G4200D::configure(int rate, int range) {
+void I2C::L3G4200D::configure(int rate) {
     size_t i;
 
     for(i = 0; RATE_SETABLE[i]; ++i) 

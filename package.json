@@ -1,5 +1,5 @@
 {
-    "name"        : "ndrone",
+    "name"        : "hdrone",
     "description" : "Hybrid software for quadrocopter on Node.js",
     "version"     : "0.3.0",
     "keywords"    : ["copter"],
@@ -15,7 +15,7 @@
 
     "repository" : {
         "type"   : "git",
-        "url"     : "http://github.com/mikehhawley/ndrone.git"
+        "url"     : "http://github.com/mikehhawley/hdrone.git"
     },
 
     "devDependencies" : {
