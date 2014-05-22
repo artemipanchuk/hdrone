@@ -69,8 +69,23 @@ Code style propositions
 13. Name imported modules equal to they real names
 14. use `//#TODO: ...`, `//#FIXME: ...` and `//#XXX: ...`
 
+Logging
+-------
+Simple: no levels required, write all important logs to `stdout`. Use next format:  
+<`[event]`> [`[spot]`] <`description`>
+
+* `event`:  
+    * `ERROR`   — vital negative event
+    * `WARNING` — non-vital negative event
+    * `REPORT`  — vital neutral/positive event
+* `spot` — class, module or function, that caused:
+    * `ERROR`, `WARNING` — strictly required
+    * `REPORT` — required if related
+* `description`:
+    * `ERROR`   — cause and how system was terminated
+    * `WARNING` — cause and how was ignored
+    * `REPORT`  — message
+
 Documenting
-===========
-Documentation style
--------------------
+-----------
 Follow [Google's JSDoc](https://developers.google.com/closure/compiler/docs/js-for-compiler)
