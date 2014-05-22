@@ -82,7 +82,7 @@ static void error(const char* status) {
 
     printf(status);
     printf(".\n");
-    printf("Unable to handle error (PWM). Terminating.\n");
+    printf("[ERROR] [PWM] Unable to handle error. Terminating.\n");
 
     exit(EXIT_FAILURE);
 }
@@ -419,8 +419,12 @@ static void uninit(void) {
     }
 }
 
-/******************
- * PWM namespace
+/**********
+ * Export *
+ **********/
+
+/******
+ * PWM
  */
 
 void PWM::init(void) {
@@ -430,6 +434,10 @@ void PWM::init(void) {
 void PWM::uninit(void) {
     ::uninit();
 }
+
+/********************
+ * PWM::Device
+ */
 
 PWM::Device::Device(int channel_id, int pin_id) {
     this->channel_id = channel_id;

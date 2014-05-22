@@ -4,7 +4,7 @@
  * Local variables *
  *******************/
 
-uint8_t cache[2];
+static uint8_t cache[2];
 
 /*******************
  * Local functions *
@@ -19,7 +19,7 @@ static void error(const char* status);
 static void error(const char* status) {
     printf(status);
     printf(".\n");
-    printf("Unable to handle error (I2C). Terminating.\n");
+    printf("[ERROR] [I2C] Unable to handle error. Terminating.\n");
 
     exit(EXIT_FAILURE);    
 }

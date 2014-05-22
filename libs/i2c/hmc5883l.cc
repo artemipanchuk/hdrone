@@ -1,6 +1,6 @@
 #include "hmc5883l.hh"
 
-uint8_t buffer[6];
+static uint8_t buffer[6];
 
 static const float RATE_DEFAULT[2]    = {15, 0x10};
 static const float RATE_SETABLE[7][2] = {

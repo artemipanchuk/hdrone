@@ -1,6 +1,6 @@
 #include "adxl345.hh"
 
-uint8_t buffer[6];
+static uint8_t buffer[6];
 
 static const int RATE_DEFAULT[2]     = {100, 0x0A};
 static const int RATE_SETABLE[10][2] = {

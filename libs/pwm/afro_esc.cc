@@ -6,7 +6,7 @@ PWM::Afro_ESC::Afro_ESC(int motor_id, int pin_id): PWM::Device(motor_id, pin_id)
 
 void PWM::Afro_ESC::set(int value) {
     if((value > 100) || (value < 0)) {
-        printf("value should be between 0 and 100 (PWM::Afro_ESC::set). Ignoring.\n");
+        printf("[WARNING] [PWM::Afro_ESC::set] value should be between 0 and 100. Ignoring.\n");
         return;
     }
 

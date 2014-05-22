@@ -53,14 +53,6 @@ double I2C::BMP085::read_pressure(void) {
     return pressure;
 }
 
-double I2C::BMP085::read_altitude(void) {
-    uint32_t up       = this->read_up();
-    double   pressure = this->calc_pressure(up);
-    double   altitude = this->calc_altitude(pressure);
-
-    return altitude;
-}
-
 int32_t I2C::BMP085::read_ut(void) {
     uint8_t buffer[2];
     int32_t ut = 0;

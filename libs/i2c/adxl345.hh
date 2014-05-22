@@ -6,7 +6,6 @@
 #define I2C_ADXL345_MULTIPLICATOR (2.0/1024.0)
 
 namespace I2C {
-
     class ADXL345: public Device {
     public:
          ADXL345(char* bus);
