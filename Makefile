@@ -18,13 +18,13 @@ TSDREPO = http://github.com/borisyankov/DefinitelyTyped/raw/master
 TSDDIR  = definitions
 
 # Definitions dependencies
-TSDLIST = node \
+TSDLIST = node     \
           smoothie
 
 # Sources
-COPTER_SOURCES = copter/master.ts \
-                 copter/flight/flight.ts \
-                 copter/vision/vision.ts \
+COPTER_SOURCES = copter/master.ts          \
+                 copter/flight/flight.ts   \
+                 copter/vision/vision.ts   \
                  copter/contact/contact.ts
 
 CLIENT_SOURCES = client/index.ts
@@ -69,10 +69,17 @@ build: $(OUT)/copter $(OUT)/client
 
 deploy: build $(OUT)/package.json $(OUT)/npm-shrinkwrap.json $(OUT)/binding.gyp
 	cd $(OUT) && tar -cf hdrone-copter.tar $(shell ls $(OUT) | grep -vP 'client|node_modules')
+	
+	ssh $(RTARGET) 'rm -rf $(RPATH) && mkdir $(RPATH)'
 	scp $(OUT)/hdrone-copter.tar '$(RTARGET):$(RPATH)/hdrone.tar'
-	ssh $(RTARGET) 'cd $(RPATH) && tar -xvf hdrone.tar > /dev/null && rm hdrone.tar'
-	ssh $(RTARGET) 'cd $(RPATH) && node-gyp configure --python /bin/python2 && node-gyp build && \
-					cp build/Release/flight.node copter/flight/flight.node && rm -r build'
+	ssh $(RTARGET) 'cd $(RPATH)                                           && \
+	                tar -xvf hdrone.tar > /dev/null && rm hdrone.tar      && \
+                    node-gyp configure --python /bin/python2              && \
+                    node-gyp build                                        && \
+					cp build/Release/controller.node libs/controller.node && \
+					rm -r build                                           && \
+	                find . -name "*.cc" -o -name "*.hh" | xargs rm        && \
+	                find . -type d -empty               | xargs rmdir'
 	rm $(OUT)/hdrone-copter.tar
 
 clone:
