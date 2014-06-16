@@ -11,8 +11,8 @@ import OSD       = require('./osd/osd');
 
 var udpInfo = new Transport.UdpTransport({
     host : config.DOMAIN,
-    port : config.FPV_INFO_PORT,
-    timeout : config.FPV_INFO_TIMEOUT
+    port : config.STATE_PORT,
+    timeout : config.STATE_TIMEOUT
 });
 
 var decoder = new Protocol.Decoder;

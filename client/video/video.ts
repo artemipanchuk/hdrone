@@ -42,8 +42,8 @@ import transport    = require('../../common/transport');
 import VideoDecoder = require('./video_decoder');
 
 class Video {
-    public width  = config.FPV_VIDEO_WIDTH;
-    public height = config.FPV_VIDEO_HEIGHT;
+    public width  = config.VIDEO_WIDTH;
+    public height = config.VIDEO_HEIGHT;
     public ratio  = this.width / this.height;
 
     private _transport: transport.Transport;
@@ -53,8 +53,8 @@ class Video {
     constructor(canvas: HTMLCanvasElement) {
         this._transport = new transport.TcpTransport({
             host : config.DOMAIN,
-            port : config.FPV_VIDEO_PORT,
-            timeout : config.FPV_VIDEO_TIMEOUT
+            port : config.VIDEO_PORT,
+            timeout : config.VIDEO_TIMEOUT
         });
 
         this._decoder = new VideoDecoder(this.width, this.height);
