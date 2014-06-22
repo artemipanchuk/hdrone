@@ -8,7 +8,7 @@
 namespace I2C {
     class L3G4200D: public Device {
     public:
-         L3G4200D(char* bus);
+         L3G4200D(const char* bus);
         ~L3G4200D(void);
         
         void   configure(int rate);

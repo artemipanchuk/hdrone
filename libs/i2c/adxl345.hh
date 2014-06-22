@@ -8,7 +8,7 @@
 namespace I2C {
     class ADXL345: public Device {
     public:
-         ADXL345(char* bus);
+         ADXL345(const char* bus);
         ~ADXL345(void);
         
         void   configure(int rate, int range);

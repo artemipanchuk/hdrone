@@ -23,14 +23,14 @@ namespace I2C {
 
     class Device {
     public:
-        Device(char* bus, uint8_t address);
+        Device(const char* bus, uint8_t address);
         ~Device(void);
 
         void write(uint8_t address, uint8_t byte);
         void write(uint8_t* buffer, uint8_t size);
         void read(uint8_t address, uint8_t* buffer, uint8_t size);
 
-        char* bus;
+        const char* bus;
         int   fd;
     private:
     };

@@ -1,6 +1,6 @@
 #include "bmp085.hh"
 
-I2C::BMP085::BMP085(char* bus): I2C::Device(bus, I2C::BMP085::ADDRESS) {
+I2C::BMP085::BMP085(const char* bus): I2C::Device(bus, I2C::BMP085::ADDRESS) {
     uint8_t buffer[2];
 
     this->read(0xAA, buffer, 2);

@@ -26,7 +26,7 @@ static const float RANGE_SETABLE[8][2] = {
     {8.1,  0xE0}
 };
 
-I2C::HMC5883L::HMC5883L(char* bus): I2C::Device(bus, I2C::HMC5883L::ADDRESS) {
+I2C::HMC5883L::HMC5883L(const char* bus): I2C::Device(bus, I2C::HMC5883L::ADDRESS) {
     this->write(0x02, 0x00);
 
     this->rate  = RATE_DEFAULT[0];

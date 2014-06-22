@@ -103,12 +103,12 @@ namespace PWM {
 
     class Device {
     public:
-         Device(int channel_id, int pin_id);
+         Device(int, int);
         ~Device();
 
-        void set(int value);
+        void set(int);
         void clear(void);
-        void error(const char* status);
+        void error(const char*);
 
     private:
         int channel_id;

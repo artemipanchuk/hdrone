@@ -9,7 +9,7 @@
 namespace I2C {
     class HMC5883L: public Device {
     public:
-         HMC5883L(char* bus);
+         HMC5883L(const char* bus);
         ~HMC5883L(void);
         
         void   configure(float rate, float range);

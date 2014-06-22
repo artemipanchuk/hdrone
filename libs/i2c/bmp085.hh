@@ -10,7 +10,7 @@
 namespace I2C {
     class BMP085: public Device {
     public:
-        BMP085(char* bus);
+        BMP085(const char* bus);
         
         double read_temperature(void);
         double read_pressure(void);

@@ -9,7 +9,7 @@ static const int RATE_SETABLE[3][2] = {
     {2000, 0x20}
 };
 
-I2C::L3G4200D::L3G4200D(char* bus): I2C::Device(bus, I2C::L3G4200D::ADDRESS) {
+I2C::L3G4200D::L3G4200D(const char* bus): I2C::Device(bus, I2C::L3G4200D::ADDRESS) {
     this->write(0x20, 0x1F);
     this->write(0x21, 0x00);
     this->write(0x22, 0x08);

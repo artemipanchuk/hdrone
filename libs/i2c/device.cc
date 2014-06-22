@@ -17,9 +17,8 @@ static void error(const char* status);
  */
 
 static void error(const char* status) {
-    printf(status);
-    printf(".\n");
-    printf("[ERROR] [I2C] Unable to handle error. Terminating.\n");
+    printf("[ERROR] [I2C] %s.\n", status);
+    printf("              Unable to handle error. Terminating.\n");
 
     exit(EXIT_FAILURE);    
 }
@@ -73,7 +72,7 @@ void I2C::init_secondary(void) {
  * I2C::Device
  */
 
-I2C::Device::Device(char* bus, uint8_t address) {
+I2C::Device::Device(const char* bus, uint8_t address) {
     int fd;
     if((fd = open(bus, O_RDWR)) < 0)
         error("Failed to open I2C bus");

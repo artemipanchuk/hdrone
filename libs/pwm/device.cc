@@ -110,7 +110,7 @@ static void* map_peripheral(uint32_t start, uint32_t size) {
     return va;
 }
 
-/***************
+/************
  * GPIO pins
  */
 
@@ -150,7 +150,7 @@ static void set_pin_level(int pin_id, int level) {
         gpio_region[PWM_DEVICE_GPIO_CLR0] = 1 << pin_id;
 }
 
-/*******************
+/***************
  * DMA channels
  */
 
@@ -435,7 +435,7 @@ void PWM::uninit(void) {
     ::uninit();
 }
 
-/********************
+/**************
  * PWM::Device
  */
 

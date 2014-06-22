@@ -25,7 +25,7 @@ static const int RANGE_SETABLE[4][2] = {
     {16, 0x03}
 };
 
-I2C::ADXL345::ADXL345(char* bus): I2C::Device(bus, I2C::ADXL345::ADDRESS) {
+I2C::ADXL345::ADXL345(const char* bus): I2C::Device(bus, I2C::ADXL345::ADDRESS) {
     this->write(0x2D, 0x00);
     this->write(0x2D, 0x08);
 
