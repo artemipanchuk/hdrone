@@ -76,8 +76,6 @@ export class Encoder extends stream.Readable {
         this._controlBk[0] = EDataType.CONTROL;
     }
 
-    public encode(data: IState): void;
-    public encode(data: IControl): void;
     public encode(data: any) {
         'load' in data ? this._encodeState(data) : this._encodeControl(data);
     }
