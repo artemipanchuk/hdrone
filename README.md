@@ -1,7 +1,6 @@
 # hdrone UNSUPPORTED
 Not sure if it will build now. May be used as a reference.
 
-======
 **Forked from [ndrone-experiment](https://github.com/loyd/ndrone-experiment) to continue development.**  
 Hybrid software for quadrocopter on Node.js.  
 
